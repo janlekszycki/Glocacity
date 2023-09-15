@@ -1,0 +1,67 @@
+<nav class="navbar sticky-top border-bottom border-success border-opacity-25 navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/glocacity-logo-32w.png" class="d-inline-block align-text-center">
+            Glocacity
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/ranges">Shooting Ranges</a>
+                <!-- <a class="nav-link" href="/store">Store</a> -->
+            </div>
+            <div class="navbar-nav d-flex align-items-center">
+                <% if(!currentUser) {%>
+                    <div class="col-xl align-self-start">
+                        <a class="btn btn-success btn-sm" href="/register">Register</a>
+                    </div>
+                    <div class="col-xl align-self-start"><a class="btn btn-outline-success btn-sm ms-2"
+                            href="/login">Login</a></div>
+                    <% } else { %>
+                        <div class="col-xl align-self-start nav-item dropdown">
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="rounded-circle shadow" style="width:3em" crossorigin="anonymous"
+                                    src="<%=currentUser.avatar.url %>" alt="">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow pt-3 ">
+                                <li class="px-3 mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar me-3">
+                                            <img class="rounded-circle shadow" crossorigin="anonymous"
+                                                src="<%=currentUser.avatar.url %>" style="width:5em" alt="">
+                                        </div>
+                                        <div class="text-nowrap">
+                                            <a class="h6 mt-2 mt-sm-0 link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover"
+                                                href="/user/<%=currentUser._id%>/edit">
+                                                <%=currentUser.firstname%>
+                                            </a>
+                                            <p class="small m-0">user: <%=currentUser.username%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/user/<%=currentUser._id%>/edit"><i
+                                            class="bi bi-person-rolodex me-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" href="/user/<%=currentUser._id%>/listings"><i
+                                            class="bi bi-card-list me-2"></i>My Listings</a></li>
+                                <li><a class="dropdown-item" href="/user/<%=currentUser._id%>/reviews"><i
+                                            class="bi bi-bookmark-heart me-2"></i>My Reviews</a></li>
+                                <li><a class="dropdown-item text-danger" href="/logout"><i
+                                            class="bi bi-power me-2"></i>Sign
+                                        Out</a></li>
+                            </ul>
+                        </div>
+
+                        <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

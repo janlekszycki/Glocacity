@@ -1,0 +1,92 @@
+<% layout('./layouts/boilerplate') -%>
+
+    <div class="container mt-3">
+        <div class="row">
+            <%- include('../partials/users/side-nav') %>
+                <div class="col-lg-9">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <div class="row align-items-start">
+                                <div class="col h3">
+                                    <h3>My Listings
+                                        <% if (ranges.length !=0 ) { %>
+                                            (<%=ranges.length %>)
+                                                <% } %>
+                                    </h3>
+                                </div>
+                                <div class="col text-end "><a href="/ranges/new" class="btn btn-sm btn-success"> +
+                                        Add
+                                        new
+                                        shooting
+                                        range</a></div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <% if (ranges.length !=0 ) { %>
+                                <div class="row">
+                                    <% for (range of ranges) {%>
+                                        <div class="col-xl-12 mb-3">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-xl-11">
+                                                            <h4 class="card-title mb-3"><a
+                                                                    href="/ranges/<%=range._id %>"
+                                                                    class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-25-hover">
+                                                                    <%= range.title %> <span class="small"><i
+                                                                                class="bi bi-box-arrow-in-up-right"></i></span>
+                                                                </a>
+                                                            </h4>
+                                                            <p class="card-text">
+                                                                <% if (range.reviews.length !=0 ) {%>
+                                                                    Number of reviews: <%= range.reviews.length%><br>
+                                                                        Last review of <strong>
+                                                                            <%=range.reviews[range.reviews.length-1].rating
+                                                                                %>
+                                                                                stars</strong> on
+                                                                        <%=range.reviews[range.reviews.length-1].date %>
+                                                                            <% } else {%>
+                                                                                So far no reviews
+                                                                                <% } %>
+                                                            </p>
+
+                                                            <p></p>
+                                                        </div>
+                                                        <div class="col-xl-1">
+                                                            <div
+                                                                class="d-inline-flex justify-content-evenly flex-column h-100 w-100">
+                                                                <div class=""><a href="/ranges/<%=range._id %>/edit"
+                                                                        class="btn btn-sm btn-outline-success me-3"><i
+                                                                            class="bi bi-pen"></i></a></div>
+                                                                <div class="">
+                                                                    <form
+                                                                        action="/ranges/<%= range._id %>?_method=DELETE"
+                                                                        method="POST"><button
+                                                                            class="btn btn-sm btn-outline-danger"><i
+                                                                                class="bi bi-trash"></i></button></form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                </div>
+
+                                <%} else { %>
+                                    <div class="row justify-content-md-center" style="height: 200px;">
+                                        <div class="col text-center mt-5">
+                                            <h4 class="mb-3">You have no listings</h4>
+                                            <a href="/ranges/new" class="btn btn-success"> Add your first shooting
+                                                range</a>
+                                        </div>
+                                    </div>
+
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>

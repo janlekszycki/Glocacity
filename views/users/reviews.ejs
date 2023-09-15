@@ -1,0 +1,62 @@
+<% layout('./layouts/boilerplate') -%>
+
+    <div class="container mt-3">
+        <div class="row">
+            <%- include('../partials/users/side-nav') %>
+                <div class="col-lg-9">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h3>My reviews
+                                <% if (reviews.length !=0 ) { %>
+                                    (<%=reviews.length %>)
+                                        <% } %>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <% if (reviews.length !=0 ) { %>
+                                <ul class="list-group list-group-flush">
+                                    <% for (review of reviews) {%>
+                                        <li class="list-group-item">
+                                            <div class="row my-3">
+                                                <div class="col-3">
+                                                    <h5 class="card-text">Your rating: <%=review.rating %> <i
+                                                                class="bi bi-star-fill text-warning"></i></h5>
+                                                    <img src="<%=review.range.images[0].thumbnail %>"
+                                                        class="rounded-4 float-start" style="width:150px">
+                                                </div>
+                                                <div class="col-4">
+                                                    <h5 class="card-text">You ware
+                                                        reviewing:</h5>
+                                                    <h4 class="card-text"><a href="/ranges/<%=review.range._id %>"
+                                                            class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-25-hover">
+                                                            <%= review.range.title %> <span class="small"><i
+                                                                        class="bi bi-box-arrow-in-up-right"></i></span>
+                                                        </a></h4>
+                                                    <p class="card-text">
+                                                        <%= review.date %>
+                                                    </p>
+                                                </div>
+                                                <div class="col-5">
+                                                    <h5 class="card-text">You wrote:</h5>
+                                                    <p class="card-text">
+                                                        <%=review.body %>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </li>
+
+                                        <% } %>
+                                </ul>
+                                <%} else { %>
+                                    <div class="row justify-content-md-center" style="height: 200px;">
+                                        <div class="col text-center mt-5">
+                                            <h4 class="mb-3">You have not written any review</h4>
+                                            <a href="/ranges" class="btn btn-success"> Add your first review</a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+        </div>

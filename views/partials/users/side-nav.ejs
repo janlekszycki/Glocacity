@@ -1,0 +1,34 @@
+<div class="offcanvas-lg col-3">
+    <div class="card shadow">
+        <img src="<%=user.avatar.url%>" alt="" crossorigin="anonymous"
+            class="card-img-top rounded-circle w-50 mx-auto mt-3">
+        <div class="card-body">
+            <div class="text-center"><strong>
+                    <%=user.firstname %>
+                </strong><br>
+                <small> user name:
+                    <%=user.username %>
+                </small>
+            </div>
+            <hr>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link link-secondary" href="/user/<%=currentUser._id%>/edit"><i
+                            class="bi bi-person-rolodex me-2"></i>My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-secondary" href="/user/<%=currentUser._id%>/listings"><i
+                            class="bi bi-card-list me-2"></i>My Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-secondary" href="/user/<%=currentUser._id%>/reviews"><i
+                            class="bi bi-bookmark-heart me-2"></i>My Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-danger" href="/logout"><i class="bi bi-power me-2"></i>Sign
+                        Out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

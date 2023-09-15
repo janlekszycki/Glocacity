@@ -1,0 +1,45 @@
+<% layout('./layouts/boilerplate') -%>
+
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow">
+
+                <div class="card-body">
+                    <h2 class="card-title">Add New Range</h2>
+                    <form action="/ranges" method="POST" class="needs-validation" enctype="multipart/form-data"
+                        novalidate>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="range[title]" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" name="range[location]" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="">$</span>
+                                <input type="text" class="form-control" id="price" name="range[price]"
+                                    placeholder="0.00" required>
+                            </div>
+                        </div>
+                        <div class=" mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="range[description]" class="form-control" id="description" cols="30"
+                                rows="10" required wrap="hard"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Upload shooting range images</label>
+                            <input class="form-control" type="file" id="formFileMultiple" name="image" multiple>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-success">Add Range</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
