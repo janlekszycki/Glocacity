@@ -182,7 +182,7 @@ app.use((err, req, res, next) => {
     const { statusCode = 500, message = 'Internal Server Error' } = err;
     res.status(statusCode).render('error', { status: res.statusCode, pg_title: res.statusCode, err })
 })
-
+//
 app.listen(process.env.PORT || 5000, () => {
     console.log(`[index.js] EXPRESS APP IS LISTENING ON PORT ${process.env.PORT}!`)
 })
