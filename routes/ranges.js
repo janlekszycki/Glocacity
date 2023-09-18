@@ -15,6 +15,8 @@ router.route('/')
 
 router.get('/new', isLoggedIn, ranges.renderNewForm)
 
+router.get('/search', ranges.search)
+
 router.route('/:id')
     .get(catchAsync(ranges.showRange))
     .put(isLoggedIn, isAuthor, upload.array('image'), validateRange, catchAsync(ranges.updateRange))
