@@ -9,6 +9,28 @@ module.exports.index = async (req, res) => {
     res.render('ranges/index', { pg_title: 'All Ranges', ranges });
 };
 
+module.exports.search = async (req, res) => {
+    try {
+        let result = await Range.collection.aggregate([
+            {
+                "$search": {
+                    "autocomplete": {
+                        "query": `${req.query.query}`,
+                        "path": "title",
+                        "fuzzy": {
+                            "maxEdits": 2,
+                            "prefixLength": 3
+                        }
+                    }
+                }
+            }
+        ]).toArray();
+        res.send(result);
+    } catch (e) {
+        res.status(500).send({ message: e.message });
+    }
+};
+
 module.exports.renderNewForm = (req, res) => {
     res.render('ranges/new', { pg_title: 'Add New Range' });
 };
