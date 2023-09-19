@@ -4,7 +4,7 @@ const map = new mapboxgl.Map({
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11',
     center: [-103.5917, 40.6699],
-    zoom: 4
+    zoom: 3
 });
 
 map.addControl(new mapboxgl.NavigationControl());
@@ -37,11 +37,11 @@ map.on('load', () => {
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#fc6203',
+                '#00ad14',
                 5,
-                '#fc6203',
+                '#00ad14',
                 15,
-                '#fc6203'
+                '#00ad14'
             ],
             'circle-radius': [
                 'step',
@@ -73,9 +73,9 @@ map.on('load', () => {
         source: 'ranges',
         filter: ['!', ['has', 'point_count']],
         paint: {
-            'circle-color': '#ffffff',
-            'circle-radius': 10,
-            'circle-stroke-width': 2,
+            'circle-color': '#00ad14',
+            'circle-radius': 7,
+            'circle-stroke-width': 1,
             'circle-stroke-color': '#000000'
         }
     });

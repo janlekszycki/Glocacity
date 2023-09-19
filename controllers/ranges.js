@@ -3,10 +3,26 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapboxToken });
 const { cloudinary } = require('../integrations/cloudinary');
+const { object } = require('joi');
 
 module.exports.index = async (req, res) => {
-    const ranges = await Range.find({}).sort('-_id');
-    res.render('ranges/index', { pg_title: 'All Ranges', ranges });
+    const sortByObj = {};
+    let { sortby, sortway, pageno, resperpage } = req.query;
+    if (sortby && sortway) {
+        Object.defineProperty(sortByObj, `${sortby}`, { value: `${sortway}`, enumerable: true });
+    } else {
+        sortByObj._id = 'desc';
+    };
+    if (!pageno) {
+        pageno = 0;
+    };
+    if (!resperpage) {
+        resperpage = 5;
+    }
+    const totalResults = await Range.aggregate().count('title');
+
+    const ranges = await Range.find({}, null, { skip: pageno * resperpage }).sort(sortByObj).limit(resperpage);
+    res.render('ranges/index', { pg_title: 'All Ranges', ranges, pageno, resperpage, totalresults: totalResults[0].title, sortByObj });
 };
 
 module.exports.search = async (req, res) => {
