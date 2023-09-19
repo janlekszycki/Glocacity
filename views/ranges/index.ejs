@@ -1,58 +1,113 @@
 <% layout('./layouts/boilerplate') -%>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js' crossorigin="anonymous"></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' crossorigin="anonymous" rel='stylesheet' />
-    <div class="row rounded-4">
 
-        <div id="map" class="rounded-4 shadow" style="width: 100%; height: 500px"></div>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js' crossorigin="anonymous"></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' crossorigin="anonymous"
+            rel='stylesheet' />
+        <div class="row rounded-4">
 
-    </div>
-    <div class="row d-flex">
-        <div class="col mt-3">
-            <h1>All Ranges</h1>
-            <% for (let range of ranges) {%>
-                <div class="row mb-3 mt-1 shadow rounded-4">
-                    <div class="col-4 p-3">
-                        <%if (range.images.length) {%>
-                            <img src="<%= range.images[0].url %>" crossorigin="anonymous"
-                                class="img-fluid rounded-4 shadow" alt="...">
-                            <% } %>
-                    </div>
-                    <div class="col p-3">
-                        <div class="row">
-                            <div class="col">
-                                <h5>
-                                    <strong>
+            <div id="map" class="rounded-4 shadow" style="width: 100%; height: 500px"></div>
 
-                                        <a href="/ranges/<%=range._id %>"
-                                            class="link-dark link-offset-1 link-underline-opacity-0 link-underline-opacity-100-hover">
-                                            <%= range.title %>
-                                        </a>
-                                    </strong>
-                                </h5>
-                                <p>
-                                    <i class="bi bi-geo-alt-fill"></i>
-                                    <%= range.location %>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row">
-                            <div class="pe-2"><i class="bi bi-chat-left"></i></div>
-                            <div class="">
-                                <p>
-                                    <%= range.description.substring(0, 300) %> ...
-                                        <a href=" /ranges/<%=range._id %>" class="link-success link-offset-1 link-underline-opacity-25
-                                    link-underline-opacity-100-hover">
-                                            read more</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
         </div>
-    </div>
-    <script>
-        const mapToken = '<%- process.env.MAPBOX_TOKEN%>';
-        const ranges = { features: <%- JSON.stringify(ranges) %>}
-    </script>
-    <script src="/javascripts/clusterMap.js"></script>
+
+            <div class="row d-flex">
+                <div class="col mt-3">
+                    <div class="row">
+                        <div class="col">
+                            <h1>All Ranges</h1>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sort by:
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="ranges?sortby=title&sortway=asc">Title: A-Z</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="ranges?sortby=title&sortway=desc">Title: Z-A</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="ranges?sortby=_id&sortway=desc">Newest: first</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="ranges?sortby=_id&sortway=asc">Oldest: first</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% for (let range of ranges) {%>
+                        <div class="row mb-3 mt-1 shadow rounded-4">
+                            <div class="col-4 p-3">
+                                <%if (range.images.length) {%>
+                                    <img src="<%= range.images[0].url %>" crossorigin="anonymous"
+                                        class="img-fluid rounded-4 shadow" alt="...">
+                                    <% } %>
+                            </div>
+                            <div class="col p-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>
+                                            <strong>
+
+                                                <a href="/ranges/<%=range._id %>"
+                                                    class="link-dark link-offset-1 link-underline-opacity-0 link-underline-opacity-100-hover">
+                                                    <%= range.title %>
+                                                </a>
+                                            </strong>
+                                        </h5>
+                                        <p>
+                                            <i class="bi bi-geo-alt-fill"></i>
+                                            <%= range.location %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <div class="pe-2"><i class="bi bi-chat-left"></i></div>
+                                    <div class="">
+                                        <p>
+                                            <%= range.description.substring(0, 300) %> ...
+                                                <a href=" /ranges/<%=range._id %>" class="link-success link-offset-1 link-underline-opacity-25
+                                    link-underline-opacity-100-hover">
+                                                    read more</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto mx-auto">
+                    <% if (totalresults>= resperpage) {%>
+                        <nav>
+                            <ul class="pagination pagination-sm">
+                                <li class="page-item <% if(pageno == 0) {%>disabled<% } %>">
+                                    <a class="page-link"
+                                        href="/ranges?sortby=<%=Object.keys(sortByObj)%>&sortway=<%=Object.values(sortByObj)%>&pageno=<%=parseInt(pageno)-1%>&resperpage=<%=resperpage%>">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <% for (let i=0; i<=Math.floor(totalresults/resperpage); i++){%>
+                                    <li class="page-item <% if(pageno == i) {%>active<% } %>"><a class="page-link"
+                                            href="/ranges?sortby=<%=Object.keys(sortByObj)%>&sortway=<%=Object.values(sortByObj)%>&pageno=<%=i%>&resperpage=<%=resperpage%>">
+                                            <%= i+1 %>
+                                        </a>
+                                    </li>
+                                    <% }%>
+                                        <li class="page-item">
+                                            <a class="page-link <% if(pageno == Math.floor(totalresults/resperpage)) {%>disabled<% } %>"
+                                                href="/ranges?sortby=<%=Object.keys(sortByObj)%>&sortway=<%=Object.values(sortByObj)%>&pageno=<%=parseInt(pageno)+1%>&resperpage=<%=resperpage%>">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                            </ul>
+                        </nav>
+                        <% } %>
+                </div>
+            </div>
+
+                <script>
+                    const mapToken = '<%- process.env.MAPBOX_TOKEN%>';
+                    const ranges = { features: <%- JSON.stringify(ranges) %>}
+                </script>
+                <script src="/javascripts/clusterMap.js"></script>
