@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-// const User = require('../models/user');
 const catchAsync = require('../utils/catchAsync'); // Async Error Catch Wrapper
-//const ExpressError = require('../utils/ExpressError'); // Custom Error Hanler
 const { isLoggedIn, isTheUser } = require('../middleware'); // calls middleware functions
 const passport = require('passport');
 const users = require('../controllers/users');

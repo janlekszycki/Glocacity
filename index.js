@@ -23,7 +23,7 @@ const storeRoutes = require('./routes/store');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const { storeReturnToV2 } = require('./middleware'); // calls middleware functions
+const { returnTo, setLocalVars } = require('./middleware'); // calls middleware functions
 
 mongoose.connect(process.env.ATLAS_MONGO_CREDS + process.env.DB_COLLECTION)
     .then(() => {
@@ -141,15 +141,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Express Local Variables
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next();
-});
-
-app.use(storeReturnToV2);
+// Setting Local Variables
+app.use(setLocalVars);
 
 // Middleware supporting develpment
 app.use(morgan('dev'));

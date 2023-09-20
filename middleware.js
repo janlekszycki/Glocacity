@@ -13,14 +13,29 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-module.exports.storeReturnToV2 = (req, res, next) => {
-    if (req.path != '/login') {
-        req.session.returnTo = req.originalUrl;
-    } else {
+module.exports.setLocalVars = (req, res, next) => {
+    // setting return path after login
+    if (req.path == '/login' || req.path == '/register') {
         if (req.session.returnTo) {
             res.locals.returnTo = req.session.returnTo;
         }
+    } else {
+        req.session.returnTo = req.originalUrl;
     }
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+
+    // showing number of results per page
+    // Attention: so far it is global setting
+    // Consider evolving to function depending on route in the future
+
+    if (req.query.resperpage) {
+        req.session.resperpage = req.query.resperpage
+    };
+    if (!req.session.resperpage) { req.session.resperpage = 5 }
+    res.locals.resperpage = req.session.resperpage
+
     next();
 }
 

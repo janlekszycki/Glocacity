@@ -7,7 +7,7 @@ const { object } = require('joi');
 
 module.exports.index = async (req, res) => {
     const sortByObj = {};
-    let { sortby, sortway, pageno, resperpage } = req.query;
+    let { sortby, sortway, pageno } = req.query;
     if (sortby && sortway) {
         Object.defineProperty(sortByObj, `${sortby}`, { value: `${sortway}`, enumerable: true });
     } else {
@@ -16,13 +16,13 @@ module.exports.index = async (req, res) => {
     if (!pageno) {
         pageno = 0;
     };
-    if (!resperpage) {
-        resperpage = 5;
-    }
+    // if (!resperpage) {
+    //     resperpage = 5;
+    // }
     const totalResults = await Range.aggregate().count('title');
 
-    const ranges = await Range.find({}, null, { skip: pageno * resperpage }).sort(sortByObj).limit(resperpage);
-    res.render('ranges/index', { pg_title: 'All Ranges', ranges, pageno, resperpage, totalresults: totalResults[0].title, sortByObj });
+    const ranges = await Range.find({}, null, { skip: pageno * req.session.resperpage }).sort(sortByObj).limit(req.session.resperpage);
+    res.render('ranges/index', { pg_title: 'All Ranges', ranges, pageno, totalresults: totalResults[0].title, sortByObj });
 };
 
 module.exports.search = async (req, res) => {
