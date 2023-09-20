@@ -44,7 +44,10 @@
                                                                             <%=range.reviews[range.reviews.length-1].rating
                                                                                 %>
                                                                                 stars</strong> on
-                                                                        <%=range.reviews[range.reviews.length-1].date %>
+                                                                        <%=range.reviews[range.reviews.length-1].date.toLocaleString('en-GB',
+                                                                            { timeZone: 'UTC' , weekday: "long" ,
+                                                                            year: "numeric" , month: "long" ,
+                                                                            day: "numeric" }) %>
                                                                             <% } else {%>
                                                                                 So far no reviews
                                                                                 <% } %>
