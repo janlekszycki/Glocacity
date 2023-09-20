@@ -138,6 +138,11 @@
                                 <div class="card-body">
                                     <h6 class="card-title">
                                         <%= review.author.firstname %>
+                                            <span class="blockquote-footer">
+                                                <%= review.date.toLocaleString('en-GB', { timeZone: 'UTC' ,
+                                                    weekday: "long" , year: "numeric" , month: "long" , day: "numeric"
+                                                    }) %>
+                                            </span>
                                     </h6>
                                     <p class="starability-result" data-rating="<%= review.rating %>"></p>
                                     <p class="card-text mt-3">

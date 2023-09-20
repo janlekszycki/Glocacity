@@ -33,7 +33,9 @@
                                                                         class="bi bi-box-arrow-in-up-right"></i></span>
                                                         </a></h4>
                                                     <p class="card-text">
-                                                        <%= review.date %>
+                                                        <%= review.date.toLocaleString('en-GB', { timeZone: 'UTC' ,
+                                                            weekday: "long" , year: "numeric" , month: "long" ,
+                                                            day: "numeric" }) %>
                                                     </p>
                                                 </div>
                                                 <div class="col-5">
