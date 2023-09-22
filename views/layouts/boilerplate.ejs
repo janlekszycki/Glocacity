@@ -18,6 +18,12 @@
 </head>
 
 <body class="d-flex flex-column vh-100">
+    <div id="loader" style="position: fixed; top: 85%; left: 10%;" class="loadme-bounced">
+        <div class="loadme-bounced-child loadme-bounced1"></div>
+        <div class="loadme-bounced-child loadme-bounced2"></div>
+        <div class="loadme-bounced-child loadme-bounced3"></div>
+    </div>
+
     <%- include('../partials/navbar') %>
         <main class="container mt-4">
             <%- include('../partials/flash') %>
@@ -32,6 +38,7 @@
                 crossorigin="anonymous"></script>
             <script src="/javascripts/bootstrapFormValidation.js" crossorigin="anonymous"></script>
             <script src="/javascripts/searchBox.js" crossorigin="anonymous"></script>
+            <script src="/javascripts/loader.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

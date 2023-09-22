@@ -18,18 +18,12 @@
 </head>
 
 <body class="d-flex flex-column vh-100 globody">
-    <div id="loader" style="position: fixed; top: 85%; left: 5%;" class="h2 text-light waviy">
-        <span style="--i:1">L</span>
-        <span style="--i:2">o</span>
-        <span style="--i:3">a</span>
-        <span style="--i:4">d</span>
-        <span style="--i:5">i</span>
-        <span style="--i:6">n</span>
-        <span style="--i:7">g</span>
-        <span style="--i:8">.</span>
-        <span style="--i:9">.</span>
-        <span style="--i:10">.</span>
+    <div id="loader" style="position: fixed; top: 85%; left: 10%;" class="loadme-bounced">
+        <div class="loadme-bounced-child loadme-bounced1"></div>
+        <div class="loadme-bounced-child loadme-bounced2"></div>
+        <div class="loadme-bounced-child loadme-bounced3"></div>
     </div>
+
     <%- include('../partials/navbar') %>
         <main class="container mt-4">
             <%- include('../partials/flash') %>

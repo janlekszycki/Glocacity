@@ -14,30 +14,63 @@
     color: white;
 }
 
-.waviy {
-    position: relative;
-    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
-    font-size: 60px;
+
+.loadme-bounced {
+    width: 70px;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: 0 0 0 -35px;
+    z-index: 100;
 }
 
-.waviy span {
-    position: relative;
+.loadme-bounced .loadme-bounced-child {
+    width: 18px;
+    height: 18px;
+    background-color: #22ff00;
+    border-radius: 100%;
     display: inline-block;
-    color: #fff;
-    animation: waviy 1s infinite;
-    animation-delay: calc(.1s * var(--i));
-
+    -webkit-animation: loadme-bouncedelay-animate 1.4s infinite ease-in-out both;
+    animation: loadme-bouncedelay-animate 1.4s infinite ease-in-out both;
 }
 
-@keyframes waviy {
+.loadme-bounced .loadme-bounced1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.loadme-bounced .loadme-bounced2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes loadme-bouncedelay-animate {
 
     0%,
-    40%,
+    80%,
     100% {
-        transform: translateY(0)
+        -webkit-transform: scale(0);
+        transform: scale(0);
     }
 
-    20% {
-        transform: translateY(-20px)
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes loadme-bouncedelay-animate {
+
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }

@@ -53,7 +53,7 @@
 
                         <% if (range.reviews.length!=0){%>
                             <p class="d-inline-flex card-text">
-                                <span class="text-warning me-2 h5">
+                                <span class="text-warning me-2 h3">
                                     <% for (i=0; i < range.reviews.fullStars; i++) {%>
                                         <i class="bi bi-star-fill"></i>
 
@@ -133,23 +133,25 @@
 
                     <% }%>
 
-                        <% for (review of range.reviews) {%>
+                        <% let revs=range.reviews.sort((a,b)=> (a.date > b.date) ? -1 : ((b.date > a.date) ? 1 : 0))
+                            for (rev of revs) {%>
                             <div class="card rounded-4 mb-3">
                                 <div class="card-body">
+                                    <img class="rounded-circle shadow float-end" crossorigin="anonymous"
+                                        src="<%=rev.author.avatar.url %>" style="width:3em" alt="">
                                     <h6 class="card-title">
-                                        <%= review.author.firstname %>
+                                        <%= rev.author.firstname %>
                                             <span class="blockquote-footer">
-                                                <%= review.date.toLocaleString('en-GB', { timeZone: 'UTC' ,
-                                                    weekday: "long" , year: "numeric" , month: "long" , day: "numeric"
-                                                    }) %>
+                                                <%= rev.date.toLocaleString('en-GB', { timeZone: 'UTC' , weekday: "long"
+                                                    , year: "numeric" , month: "long" , day: "numeric" }) %>
                                             </span>
                                     </h6>
-                                    <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                                    <p class="starability-result" data-rating="<%= rev.rating %>"></p>
                                     <p class="card-text mt-3">
-                                        Review: <%= review.body %>
+                                        Review: <%= rev.body %>
                                     </p>
-                                    <% if(currentUser && review.author.equals(currentUser._id)){%>
-                                        <form action="/ranges/<%= range._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    <% if(currentUser && rev.author.equals(currentUser._id)){%>
+                                        <form action="/ranges/<%= range._id %>/reviews/<%= rev._id %>?_method=DELETE"
                                             method="POST">
                                             <button class="btn btn-outline-danger btn-sm">Delete Review</button>
                                         </form>

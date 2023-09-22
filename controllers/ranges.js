@@ -68,12 +68,14 @@ module.exports.createRange = async (req, res, next) => {
 }
 
 module.exports.showRange = async (req, res) => {
+
     const range = await Range.findById(req.params.id).populate({
         path: 'reviews',
         populate: {
             path: 'author'
         }
     }).populate('author');
+
     if (!range) {
         req.flash('error', 'Cant find that shooting range!');
         return res.redirect('/ranges');
