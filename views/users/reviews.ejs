@@ -18,13 +18,13 @@
                                     <% for (review of reviews) {%>
                                         <li class="list-group-item">
                                             <div class="row my-3">
-                                                <div class="col-3">
+                                                <div class="col-lg-3 mb-3">
                                                     <h5 class="card-text">Your rating: <%=review.rating %> <i
                                                                 class="bi bi-star-fill text-warning"></i></h5>
                                                     <img src="<%=review.range.images[0].thumbnail %>"
-                                                        class="rounded-4 float-start" style="width:150px">
+                                                        class="rounded-4 float-start" style="">
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-lg-4 mb-3">
                                                     <h5 class="card-text">You ware
                                                         reviewing:</h5>
                                                     <h4 class="card-text"><a href="/ranges/<%=review.range._id %>"
@@ -38,7 +38,7 @@
                                                             day: "numeric" }) %>
                                                     </p>
                                                 </div>
-                                                <div class="col-5">
+                                                <div class="col-lg-5">
                                                     <h5 class="card-text">You wrote:</h5>
                                                     <p class="card-text">
                                                         <%=review.body %>

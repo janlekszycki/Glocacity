@@ -45,15 +45,18 @@
                             <label for="image" class="form-label">Add Images</label>
                             <input class="form-control" type="file" id="image" name="image" multiple>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex flex-wrap">
                             <% range.images.forEach((image, i)=> {%>
-                                <img src="<%= image.thumbnail %>" class="img-thumbnail" alt="">
-                                <div class="form-check-inline mb-3">
-                                    <input class="form-check-input" type="checkbox" id="image-<%=i%>"
-                                        name="deleteImages[]" value="<%= image.filename %>">
-                                    <label class="form-check-label" for="image-<%=i%>">
-                                        <i class="bi bi-trash h4"></i>
-                                    </label>
+                                <div class="m-1">
+                                    <img src="<%= image.thumbnail %>" class="img-thumbnail" alt="">
+
+                                    <div class="form-check-inline mb-3">
+                                        <input class="form-check-input" type="checkbox" id="image-<%=i%>"
+                                            name="deleteImages[]" value="<%= image.filename %>">
+                                        <label class="form-check-label" for="image-<%=i%>">
+                                            <i class="bi bi-trash h4"></i>
+                                        </label>
+                                    </div>
                                 </div>
                                 <% }); %>
                         </div>

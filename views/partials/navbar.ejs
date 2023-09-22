@@ -16,20 +16,20 @@
             </div>
             <div class="navbar-nav align-items-center row">
 
-                <div id="searchboxframe" class="col-auto me-5 position-relative">
+                <div id="searchboxframe" class="col-lg-auto me-5 my-1 position-relative">
                     <form>
                         <input id="searchbox" size="30" class="form-control form-control-sm" type="search"
                             placeholder="Search shooting ranges">
                     </form>
                 </div>
                 <% if(!currentUser) {%>
-                    <div class="col-xl align-self-start">
+                    <div class="col-lg align-self-start my-1">
                         <a class="btn btn-success btn-sm" href="/register">Register</a>
                     </div>
-                    <div class="col-xl align-self-start"><a class="btn btn-outline-success btn-sm ms-2"
+                    <div class="col-lg align-self-start my-1"><a class="btn btn-outline-success btn-sm"
                             href="/login">Login</a></div>
                     <% } else { %>
-                        <div class="col-xl align-self-start nav-item dropdown">
+                        <div class="col-lg align-self-start nav-item dropdown">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img class="rounded-circle shadow" style="width:3em" crossorigin="anonymous"
                                     src="<%=currentUser.avatar.url %>" alt="">

@@ -14,7 +14,7 @@
                 <div class="col">
                     <h1>All Ranges</h1>
                 </div>
-                <div class="col-auto align-self-center">
+                <div class="col-xl-auto align-self-center my-1">
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-auto align-self-center">
+                <div class="col-xl-auto align-self-center my-1">
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,13 +60,13 @@
             </div>
             <% for (let range of ranges) {%>
                 <div class="row mb-3 mt-1 shadow rounded-4">
-                    <div class="col-4 p-3">
+                    <div class="col-lg-4 p-3 d-none d-md-block">
                         <%if (range.images.length) {%>
                             <img src="<%= range.images[0].url %>" crossorigin="anonymous"
                                 class="img-fluid rounded-4 shadow" alt="...">
                             <% } %>
                     </div>
-                    <div class="col p-3">
+                    <div class="col-lg p-3">
                         <div class="row">
                             <div class="col">
                                 <h5>
