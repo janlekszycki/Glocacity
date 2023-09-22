@@ -4,6 +4,7 @@ const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapboxToken });
 const { cloudinary } = require('../integrations/cloudinary');
 const { object } = require('joi');
+const reviewStarsAvarage = require('../utils/reviewStarsAvarage');
 
 module.exports.index = async (req, res) => {
     const sortByObj = {};
@@ -77,15 +78,9 @@ module.exports.showRange = async (req, res) => {
         req.flash('error', 'Cant find that shooting range!');
         return res.redirect('/ranges');
     }
-    // Avarage Review Rating and respective Stars Count
-    if (range.reviews.length) {
-        let avgRating = 0;
-        range.reviews.forEach((e) => avgRating += e.rating);
-        range.reviews.avgRating = (avgRating / range.reviews.length).toFixed(1);
-        range.reviews.fullStars = Math.floor(range.reviews.avgRating);
-        range.reviews.halfStars = (range.reviews.avgRating - Math.floor(range.reviews.avgRating) > 0.4) ? 1 : 0;
-        range.reviews.emptyStars = 5 - range.reviews.fullStars - range.reviews.halfStars;
-    }
+
+    reviewStarsAvarage(range.reviews);
+
     res.render('ranges/show', { pg_title: range.title, range });
 }
 
