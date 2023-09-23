@@ -1,3 +1,4 @@
+
 module.exports = (a) => {
     if (a.length) {
         let avgRating = 0;

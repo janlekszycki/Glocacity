@@ -26,12 +26,10 @@ module.exports.verifyEmail = (userEmail, userFirstName, verificationLink) => {
         from: 'jan@lekszycki.com',
         subject: `${userFirstName}, Verify you Glocacity Profile`,
         text: `Please click following link in oder to verify your profile in Glocacity:\n\n*********************************\n${verificationLink}\n*********************************\n\nLink is valid for 24h only`,
-        //html: `Please click following link in oder to verify your profile in Glocacity:<br><a href="${verificationLink}">Verify</a>`,
     }
     sgMail
         .send(msg)
         .then(() => {
-            //console.log(`Verification email sent to ${userEmail}`)
         })
         .catch((error) => {
             console.error(error)

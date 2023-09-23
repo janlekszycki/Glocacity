@@ -407,7 +407,6 @@
 
         function checkPassword() {
             if ((newpass.value.slice(renewpass.value.length - 1, renewpass.value.length) != renewpass.value.slice(renewpass.value.length - 1, renewpass.value.length))) {
-                console.log(renewpass.value.length);
                 rnpparent.replaceChildren(fragment);
             } else {
                 rnpparent.replaceChildren();

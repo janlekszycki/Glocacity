@@ -128,6 +128,7 @@ app.use(
                 "data:",
                 "https://res.cloudinary.com/dcb1ggwtj/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
+                "https://cdn.weatherapi.com/"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },

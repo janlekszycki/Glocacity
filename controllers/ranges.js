@@ -4,7 +4,8 @@ const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapboxToken });
 const { cloudinary } = require('../integrations/cloudinary');
 const { object } = require('joi');
-const reviewStarsAvarage = require('../utils/reviewStarsAvarage');
+const reviewStarsAvarage = require('../utils/review-stars-avarage');
+const fetchingWeather = require('../utils/fetching-weather');
 
 module.exports.index = async (req, res) => {
     const sortByObj = {};
@@ -17,9 +18,7 @@ module.exports.index = async (req, res) => {
     if (!pageno) {
         pageno = 0;
     };
-    // if (!resperpage) {
-    //     resperpage = 5;
-    // }
+
     const totalResults = await Range.aggregate().count('title');
 
     const ranges = await Range.find({}, null, { skip: pageno * req.session.resperpage }).sort(sortByObj).limit(req.session.resperpage);
@@ -69,7 +68,7 @@ module.exports.createRange = async (req, res, next) => {
 
 module.exports.showRange = async (req, res) => {
 
-    const range = await Range.findById(req.params.id).populate({
+    var range = await Range.findById(req.params.id).populate({
         path: 'reviews',
         populate: {
             path: 'author'
@@ -82,6 +81,8 @@ module.exports.showRange = async (req, res) => {
     }
 
     reviewStarsAvarage(range.reviews);
+
+    range.weather = await fetchingWeather(range.geometry.coordinates)
 
     res.render('ranges/show', { pg_title: range.title, range });
 }

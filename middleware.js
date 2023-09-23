@@ -15,7 +15,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 module.exports.setLocalVars = (req, res, next) => {
     // setting return path after login
-    if (req.path == '/login' || req.path == '/register') {
+    if (req.path == '/login' || req.path == '/register' || req.path == '/logout') {
         if (req.session.returnTo) {
             res.locals.returnTo = req.session.returnTo;
         }
