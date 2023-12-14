@@ -33,6 +33,7 @@ const RangeSchema = new Schema({
     streetno: String,
     postcode: String,
     city: String,
+    address: String,
     country: String,
     author: {
         type: Schema.Types.ObjectId,

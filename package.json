@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jan Lekszycki",
   "license": "ISC",
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.15.3",
